@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mall?characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  project: src/main/java
+  resource: src/main/resource
+
+logging:
+  level:
+    com.liqian.mall.dao.*: debug
+
+ftp:
+  ip: 112.74.59.132
+  username: ftpuser
+  password: liqian123456
+  imageHost: http://112.74.59.132/
+
+
+
+
+
+
+

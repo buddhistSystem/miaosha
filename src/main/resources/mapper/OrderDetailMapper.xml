@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liqian.mall.dao.OrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.liqian.mall.entity.OrderDetail">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="INTEGER"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="product_image" property="productImage" jdbcType="VARCHAR"/>
+        <result column="current_unit_price" property="currentUnitPrice" jdbcType="DECIMAL"/>
+        <result column="quantity" property="quantity" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, order_no, product_id, product_name, product_image, current_unit_price, 
+    quantity, total_price, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_order_detail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insertSelective" parameterType="com.liqian.mall.entity.OrderDetail">
+        insert into mall_order_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="productImage != null">
+                product_image,
+            </if>
+            <if test="currentUnitPrice != null">
+                current_unit_price,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            create_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productImage != null">
+                #{productImage,jdbcType=VARCHAR},
+            </if>
+            <if test="currentUnitPrice != null">
+                #{currentUnitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            now(),
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.liqian.mall.entity.OrderDetail">
+        update mall_order_detail
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productImage != null">
+                product_image = #{productImage,jdbcType=VARCHAR},
+            </if>
+            <if test="currentUnitPrice != null">
+                current_unit_price = #{currentUnitPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <insert id="insertOrderDetailList" parameterType="java.util.List">
+        insert into mall_order_detail
+        (user_id, order_no, product_id, product_name, product_image, current_unit_price,
+        quantity, total_price, create_time)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.userId,jdbcType=INTEGER},
+            #{item.orderNo,jdbcType=VARCHAR},
+            #{item.productId,jdbcType=INTEGER},
+            #{item.productName,jdbcType=VARCHAR},
+            #{item.productImage,jdbcType=VARCHAR},
+            #{item.currentUnitPrice,jdbcType=DECIMAL},
+            #{item.quantity,jdbcType=INTEGER},
+            #{item.totalPrice,jdbcType=DECIMAL},
+            now()
+            )
+        </foreach>
+    </insert>
+    <select id="listByUserIdAndOrderNo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_order_detail
+        where user_id = #{userId,jdbcType=INTEGER}
+        and order_no =#{orderNo,jdbcType=VARCHAR}
+    </select>
+    <select id="listByOrderNo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_order_detail
+        and order_no =#{orderNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

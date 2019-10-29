@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liqian.mall.dao.ShippingMapper">
+    <resultMap id="BaseResultMap" type="com.liqian.mall.entity.Shipping">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="receive_name" property="receiveName" jdbcType="VARCHAR"/>
+        <result column="receive_phone" property="receivePhone" jdbcType="VARCHAR"/>
+        <result column="receive_mobile" property="receiveMobile" jdbcType="VARCHAR"/>
+        <result column="receive_province" property="receiveProvince" jdbcType="VARCHAR"/>
+        <result column="receive_city" property="receiveCity" jdbcType="VARCHAR"/>
+        <result column="receive_district" property="receiveDistrict" jdbcType="VARCHAR"/>
+        <result column="receive_address" property="receiveAddress" jdbcType="VARCHAR"/>
+        <result column="receive_zip" property="receiveZip" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_id, receive_name, receive_phone, receive_mobile, receive_province, receive_city, 
+    receive_district, receive_address, receive_zip, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_shipping
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insertSelective" parameterType="com.liqian.mall.entity.Shipping" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into mall_shipping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="receiveName != null">
+                receive_name,
+            </if>
+            <if test="receivePhone != null">
+                receive_phone,
+            </if>
+            <if test="receiveMobile != null">
+                receive_mobile,
+            </if>
+            <if test="receiveProvince != null">
+                receive_province,
+            </if>
+            <if test="receiveCity != null">
+                receive_city,
+            </if>
+            <if test="receiveDistrict != null">
+                receive_district,
+            </if>
+            <if test="receiveAddress != null">
+                receive_address,
+            </if>
+            <if test="receiveZip != null">
+                receive_zip,
+            </if>
+            create_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="receiveName != null">
+                #{receiveName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePhone != null">
+                #{receivePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveMobile != null">
+                #{receiveMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveProvince != null">
+                #{receiveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveCity != null">
+                #{receiveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveDistrict != null">
+                #{receiveDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveAddress != null">
+                #{receiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveZip != null">
+                #{receiveZip,jdbcType=VARCHAR},
+            </if>
+            now(),
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.liqian.mall.entity.Shipping">
+        update mall_shipping
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="receiveName != null">
+                receive_name = #{receiveName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePhone != null">
+                receive_phone = #{receivePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveMobile != null">
+                receive_mobile = #{receiveMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveProvince != null">
+                receive_province = #{receiveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveCity != null">
+                receive_city = #{receiveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveDistrict != null">
+                receive_district = #{receiveDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveAddress != null">
+                receive_address = #{receiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveZip != null">
+                receive_zip = #{receiveZip,jdbcType=VARCHAR},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByUserIdAndShippingId">
+      delete from mall_shipping
+      where id = #{shippingId,jdbcType=INTEGER}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+    <update id="updateByShipping" parameterType="com.liqian.mall.entity.Shipping">
+        update mall_shipping
+        <set>
+            <if test="receiveName != null">
+                receive_name = #{receiveName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePhone != null">
+                receive_phone = #{receivePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveMobile != null">
+                receive_mobile = #{receiveMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveProvince != null">
+                receive_province = #{receiveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveCity != null">
+                receive_city = #{receiveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveDistrict != null">
+                receive_district = #{receiveDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveAddress != null">
+                receive_address = #{receiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveZip != null">
+                receive_zip = #{receiveZip,jdbcType=VARCHAR},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+        and user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByUserIdAndShippingId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_shipping
+        where id = #{shippingId,jdbcType=INTEGER}
+        and user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="listByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_shipping
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+</mapper>
