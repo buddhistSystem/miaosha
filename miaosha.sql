@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : ali
  Source Server Type    : MySQL
- Source Server Version : 80013
- Source Host           : localhost:3306
- Source Schema         : mall
+ Source Server Version : 50726
+ Source Host           : rm-2zes869c0s98yg00foo.mysql.rds.aliyuncs.com:3306
+ Source Schema         : miaosha
 
  Target Server Type    : MySQL
- Target Server Version : 80013
+ Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 16/09/2019 09:51:47
+ Date: 24/03/2020 12:37:17
 */
 
 SET NAMES utf8mb4;
@@ -46,7 +46,7 @@ CREATE TABLE `mall_category`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100036 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100037 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_category
@@ -86,29 +86,6 @@ INSERT INTO `mall_category` VALUES (100035, 100034, '国漫人物', 1, NULL, '20
 INSERT INTO `mall_category` VALUES (100036, 100034, '日漫人物', 1, NULL, '2019-09-11 00:58:20', NULL);
 
 -- ----------------------------
--- Table structure for mall_order
--- ----------------------------
-DROP TABLE IF EXISTS `mall_order`;
-CREATE TABLE `mall_order`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '订单id',
-  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
-  `shipping_id` int(11) NULL DEFAULT NULL COMMENT '收货地址id',
-  `payment` decimal(20, 2) NULL DEFAULT NULL COMMENT '实际付款金额',
-  `payment_type` int(4) NULL DEFAULT NULL COMMENT '支付类型1-在线支付',
-  `postage` int(11) NULL DEFAULT NULL COMMENT '运费',
-  `status` int(11) NULL DEFAULT NULL COMMENT '订单状态：0已取消，10未付款，20已付款，40已发货，50交易成功，60交易关闭',
-  `payment_time` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
-  `send_time` datetime(0) NULL DEFAULT NULL COMMENT '发货时间',
-  `end_time` datetime(0) NULL DEFAULT NULL COMMENT '交易完成时间',
-  `close_time` datetime(0) NULL DEFAULT NULL COMMENT '交易关闭时间',
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `order_no_unique`(`order_no`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 127 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '订单表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for mall_order_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `mall_order_detail`;
@@ -125,8 +102,8 @@ CREATE TABLE `mall_order_detail`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `order_no_index`(`order_no`) USING BTREE,
-  INDEX `user_id_order_no_index`(`user_id`, `order_no`) USING BTREE
+  INDEX `order_no_index`(`order_no`(191)) USING BTREE,
+  INDEX `user_id_order_no_index`(`user_id`, `order_no`(191)) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '订单详情' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -163,7 +140,7 @@ CREATE TABLE `mall_product`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '商品表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_product
@@ -192,7 +169,7 @@ CREATE TABLE `mall_shipping`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '收货地址表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '收货地址表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_shipping
@@ -218,13 +195,14 @@ CREATE TABLE `mall_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '最后一次更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username_unique`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of mall_user
 -- ----------------------------
-INSERT INTO `mall_user` VALUES (1, 'admin', 'C4CA4238A0B923820DCC509A6F75849B', 'test@163.com', '13800138000', '问题', '答案', 0, '2016-11-06 16:56:45', '2017-04-04 19:27:36');
+INSERT INTO `mall_user` VALUES (1, 'admin', 'E10ADC3949BA59ABBE56E057F20F883E', 'test@163.com', '13800138000', '问题', '答案', 0, '2016-11-06 16:56:45', '2017-04-04 19:27:36');
 INSERT INTO `mall_user` VALUES (23, 'liqian', 'C4CA4238A0B923820DCC509A6F75849B', 'test@163.com', '13888888888', '问题', '答案', 1, '2019-08-20 08:30:49', '2019-08-21 10:36:11');
 INSERT INTO `mall_user` VALUES (27, '测试', 'C4CA4238A0B923820DCC509A6F75849B', 'test1@163.com', '666', '问题', '答案', 1, '2019-09-10 16:29:58', '2019-09-10 16:53:24');
+INSERT INTO `mall_user` VALUES (28, 'test', 'E10ADC3949BA59ABBE56E057F20F883E', NULL, NULL, NULL, NULL, 0, '2020-03-16 08:31:30', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
